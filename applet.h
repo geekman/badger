@@ -93,7 +93,7 @@ class Menu : public Applet {
 class Keyboard : public Applet {
   public:
     Keyboard(char *output, const char *prompt) :
-      ipos(0), kpos(0), prompt(prompt), output(output) {}
+      ipos(0), kpos(0), uppercase(false), prompt(prompt), output(output) {}
 
     virtual void loop() {
       if (requireRedraw) redraw();
@@ -114,12 +114,13 @@ class Keyboard : public Applet {
     // on-screen keyboard
     static const int keyboardLen = 3 * maxLine;
     static constexpr const char *keyboard = "abcdefghijklm "
-                                            "nopqrstuvwxyz "
+                                            "nopqrstuvwxyz\x81"
                                             "0123456789  \x7f\x80";
 
   protected:
     // current positions for keyboard and input buffer
     int kpos, ipos;
+    bool uppercase;
     char input[32 + 1];
 
     const char *prompt;   // user prompt

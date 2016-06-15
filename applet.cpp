@@ -151,12 +151,17 @@ void Keyboard::keypress(Key key) {
           // nothing to erase
           LcdFlash(100);
         }
+      } else if (keyboard[kpos] == 0x81) { // SHIFT
+        uppercase = !uppercase;
+        invalidate();
       } else {
         char k = keyboard[kpos];
         if (ipos >= sizeof(input) - 1) {
           // input buffer full
           LcdFlash(100);
         } else if (k != ' ') {
+          if (uppercase && k >= 'a' && k <= 'z')
+            k = k - 'a' + 'A';
           input[ipos++] = k;
           invalidate();
         }
@@ -195,7 +200,10 @@ void Keyboard::redraw() {
   // draw keyboard
   LcdRow(3);
   for (int i = 0; i < keyboardLen; i++) {
-    LcdChar(keyboard[i], kpos == i);
+    char c = keyboard[i];
+    if (uppercase && c >= 'a' && c <= 'z')
+      c = keyboard[i] - 'a' + 'A';
+    LcdChar(c, kpos == i);
   }
   
   requireRedraw = false;

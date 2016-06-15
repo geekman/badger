@@ -113,9 +113,9 @@ class Keyboard : public Applet {
 
     // on-screen keyboard
     static const int keyboardLen = 3 * maxLine;
-    static constexpr const char *keyboard = "abcdefghijklm "
+    static constexpr const char *keyboard = "abcdefghijklm_"
                                             "nopqrstuvwxyz\x81"
-                                            "0123456789  \x7f\x80";
+                                            "0123456789@ \x7f\x80";
 
   protected:
     // current positions for keyboard and input buffer

@@ -18,11 +18,13 @@ void LcdInit() {
 //////////////////////////
 
 // each character is 5 pixel wide, plus one pixel space
-void LcdChar(char c, bool invert) {
+void LcdChar(char c, bool invert, const uint8_t fontmap[][5]) {
   unsigned char inv = invert ? 0xFF : 0;
+  if (fontmap == nullptr)
+    fontmap = LcdCharTable;
   c -= 0x20; // first char in font table
   for (int i = 0; i < 5; i++)
-    LcdWrite(inv ^ LcdCharTable[c][i]);
+    LcdWrite(inv ^ fontmap[c][i]);
 
   LcdWrite(inv ^ 0x00);
 }

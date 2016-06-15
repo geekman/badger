@@ -129,7 +129,7 @@ inline void LcdCmd(byte cmd) {
 void LcdInit();
 
 // each character is 5 pixel wide, plus one pixel space
-void LcdChar(char c, bool invert=false);
+void LcdChar(char c, bool invert=false, const uint8_t fontmap[][5]=nullptr);
 
 void LcdStr(const char *str, bool invert=false);
 

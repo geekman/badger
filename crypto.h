@@ -8,18 +8,6 @@ extern "C" {
 // crypto functions in ESP SDK
 // most of it from hostapd
 
-// md5_i.h
-struct MD5Context {
-  u32 buf[4];
-  u32 bits[2];
-  u8 in[64];
-};
-
-void MD5Init(struct MD5Context *context);
-void MD5Update(struct MD5Context *context, unsigned char const *buf,
-         unsigned len);
-void MD5Final(unsigned char digest[16], struct MD5Context *context);
-
 /**
  * md5_vector - MD5 hash for data vector
  * @num_elem: Number of elements in the data vector
@@ -29,6 +17,18 @@ void MD5Final(unsigned char digest[16], struct MD5Context *context);
  * Returns: 0 on success, -1 of failure
  */
 int md5_vector(size_t num_elem, const u8 *addr[], const size_t *len, u8 *mac);
+
+/**
+ * sha1_vector - SHA-1 hash for data vector
+ * @num_elem: Number of elements in the data vector
+ * @addr: Pointers to the data areas
+ * @len: Lengths of the data blocks
+ * @mac: Buffer for the hash
+ * Returns: 0 on success, -1 on failure
+ */
+int sha1_vector(size_t num_elem, const u8 *addr[], const size_t *len,
+    u8 *mac);
+
 
 
 // aes.h

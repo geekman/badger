@@ -7,6 +7,7 @@
 
 #include "lcd.h"
 #include "dino.h"
+#include <EEPROM.h>
 
 #define BLACK 0
 #define WHITE 1
@@ -275,6 +276,24 @@ void dino_loop(int jump) {
   // increase distance whilst running
   if (d_run && (++delta > 4)) {
     delta = 0; ++d;
+  }
+
+  // check score
+  if (d >= 31337) {
+    LcdRow(2);
+    LcdStr("You made it!");
+    d_run = 0;
+
+    EEPROM.write( 0, 0x03);
+    EEPROM.write( 1, 0x13);
+    EEPROM.write( 2, 0x37);
+
+    EEPROM.write(13, 0x03);
+    EEPROM.write(14, 0x13);
+    EEPROM.write(15, 0x37);
+    EEPROM.commit();
+
+    return;
   }
 
   // obstacles

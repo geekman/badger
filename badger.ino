@@ -101,6 +101,7 @@ class MainMenu : public Menu {
       const char *menu[] = {
         "WiFi Scanner",
         "Challenges",
+        "Reset",
       };
 
       for (int i = 0; i < 3; i++) {
@@ -134,7 +135,18 @@ class MainMenu : public Menu {
           break;
         }
 
+        case 2: {
+          for (int i = 0; i < 4; i++)
+            EEPROM.write(i, 0);
+          EEPROM.commit();
+
+          LcdClear();
+          LcdRow(2);
+          LcdStr("Levels reset!");
+          delay(800);
+          invalidate();
           break;
+        }
       }
     }
 };

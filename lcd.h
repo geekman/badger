@@ -136,7 +136,7 @@ void LcdStr(const char *str, bool invert=false);
 // limit to max chars per row
 void LcdStrL(const char *str, bool invert=false);
 
-void LcdRow(int row);
+void LcdRow(int row, int col=0);
 
 void LcdClear(void);
 

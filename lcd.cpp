@@ -44,9 +44,9 @@ void LcdStrL(const char *str, bool invert) {
     LcdChar(*p, invert);
 }
 
-void LcdRow(int row) {
+void LcdRow(int row, int col) {
   LcdCmd(0x40 | (row & 0b111));  // sets Y address (0 - 5)
-  LcdCmd(0x80 | 0);              // sets X address to 0
+  LcdCmd(0x80 | (col & 0x7F));   // sets X address
 }
 
 void LcdClear(void) {

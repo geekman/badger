@@ -95,6 +95,9 @@ class MainMenu : public Menu {
 };
 
 void setup() {
+  // dont be an AP by default
+  WiFi.mode(WIFI_STA);
+
   // setup serial and get rid of pre-boot garbage
   Serial.begin(115200);
   Serial.println();
